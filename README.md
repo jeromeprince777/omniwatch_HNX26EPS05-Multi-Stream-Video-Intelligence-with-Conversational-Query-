@@ -103,6 +103,9 @@ Register automated standing query rules evaluated continuously during ingestion,
   <img src="docs/screenshots/12_verified_vlm_pipeline_mode.png" width="49%" alt="Verified Pipeline Mode Telemetry" />
 </p>
 
+> **Left:** Standing surveillance alerts feed showing automated trigger rules and real-time security audit log.  
+> **Right:** Verified VLM Pipeline mode executing *"When did a bus pass through North Gate (cam1)?"* with SmolVLM2 candidate verification and waterfall latency telemetry (`46.8 ms`).
+
 ---
 
 ## 🏗️ High-Level System Architecture

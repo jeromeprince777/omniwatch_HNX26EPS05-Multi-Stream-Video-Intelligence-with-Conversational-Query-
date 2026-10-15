@@ -10,17 +10,9 @@ DEST_DIR = os.path.join(REPO_ROOT, "docs", "screenshots")
 
 os.makedirs(DEST_DIR, exist_ok=True)
 
-MAPPINGS = [
-    ("search_console_initial_*.png", "01_search_console_tactical_hud.png"),
-    ("tours_bag_search_result_*.png", "02_tours_bag_search_dossier.png"),
-    ("camera_wall_view_*.png", "03_camera_wall_grid.png"),
-    ("clarify_once_kb_view_*.png", "04_clarify_once_spatial_memory.png"),
-    ("clarify_once_modal_roi_*.png", "05_clarify_once_roi_canvas_modal.png"),
-    ("evidence_dossier_modal_frame_*.png", "06_evidence_keyframe_reticle_modal.png"),
-    ("evidence_dossier_modal_video_*.png", "07_evidence_video_clip_modal.png"),
-    ("standing_alerts_view_*.png", "08_standing_alerts_audit_feed.png"),
-    ("omniwatch_full_demo_*.webp", "09_interactive_demo_session.webp"),
-]
+# Pre-existing brain screenshots (disabled to preserve canonical Playwright captures)
+MAPPINGS = []
+
 
 copied = 0
 for pattern, dest_name in MAPPINGS:

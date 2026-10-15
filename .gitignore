@@ -57,3 +57,7 @@ Thumbs.db
 eval/results/*.json
 eval/results/*.csv
 !eval/results/.gitkeep
+
+# Scratch directories
+scratch/
+

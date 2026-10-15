@@ -153,7 +153,7 @@ async def capture_all():
         await page.wait_for_timeout(400)
         await page.click("#mode-verified-btn")
         await page.wait_for_timeout(400)
-        await page.fill("#query-input", "Did a red car pass through cam1?")
+        await page.fill("#query-input", "When did a bus pass through North Gate (cam1)?")
         await page.click("#send-btn")
         await page.wait_for_timeout(800)
         await page.screenshot(path=str(OUT_DIR / "12_verified_vlm_pipeline_mode.png"))

@@ -673,20 +673,20 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
-    // Red car at cam1
-    if (q.includes("red") || q.includes("car") || q.includes("cam1")) {
+    // Transit Bus at North Gate (cam1)
+    if (q.includes("bus") || q.includes("transit") || q.includes("cam1") || q.includes("north gate")) {
       return {
         type: "answer",
         mode: state.activeMode,
         parser_used: "rules_deterministic",
         verifier_used: state.activeMode === "verified" ? "smolvlm2" : "none",
-        summary: "Yes, a red car passed through North Gate (cam1) at 09:00:00 UTC with high confidence.",
+        summary: "Electric transit bus identified at North Gate (cam1) at 09:00:00 UTC with high confidence (Tracklet #376).",
         parsed: {
-          intent: "exists",
-          object_phrase: "red car",
-          object_class_hint: "car",
-          attributes: { color: ["red"], carries: [] },
-          location_phrases: ["cam1"],
+          intent: "when",
+          object_phrase: "transit bus",
+          object_class_hint: "bus",
+          attributes: { color: ["blue", "white"], carries: [] },
+          location_phrases: ["north gate", "cam1"],
           camera_ids: ["cam1"],
           time: { raw: "2026-10-09 09:00:00 UTC" }
         },
@@ -698,13 +698,13 @@ document.addEventListener("DOMContentLoaded", () => {
           label: "Cam 1 - North Gate Entry",
           t_start_iso: "2026-10-09 09:00:00 UTC",
           det_conf: 0.98,
-          match_score: 0.965,
-          cls: "car",
-          matched: { cls: "car", color: ["red"], carries: [] },
+          match_score: 0.967,
+          cls: "bus",
+          matched: { cls: "bus", color: ["blue", "white"], carries: [] },
           thumb_url: "../data/cache/thumbs/trk_376.jpg",
           clip_url: "../data/cache/clips/annotated_clip_cam1_1791430200_1791430201_376.mp4",
           verified: state.activeMode === "verified",
-          verifier_score: 0.98
+          verifier_score: 0.97
         }]
       };
     }
@@ -745,8 +745,8 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
-    // Bus / Truck
-    if (q.includes("bus") || q.includes("truck")) {
+    // Large vehicle / Truck at Tours Plaza (Tracklet #248)
+    if (q.includes("truck") || q.includes("vehicle") || (q.includes("bus") && q.includes("tours"))) {
       return {
         type: "answer",
         mode: state.activeMode,
