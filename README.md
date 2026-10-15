@@ -25,53 +25,82 @@
 ### ⚡ Interactive Tactical Surveillance HUD Demo
 
 <p align="center">
-  <img src="docs/screenshots/09_interactive_demo_session.webp" alt="OmniWatch Tactical Surveillance Demo" width="96%" style="border-radius: 8px; border: 1px solid #1f293d; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+  <img src="docs/screenshots/demo_surveillance_session.webp" alt="OmniWatch Tactical Surveillance Demo" width="96%" style="border-radius: 8px; border: 1px solid #1f293d; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
 </p>
 
 </div>
 
 ---
 
-## 📸 Tactical Interface & System Showcase
+## 📸 12 Core Capabilities & Visual Interface Showcase
 
-### 1. Conversational Search Console & Grounded Intelligence Dossier
-Search multi-camera archives using everyday language. OmniWatch executes structured intent extraction, vector similarity lookup, and explicit attribute fusion (color + carrying detection) to return verified ground truth.
+Every functionality in OmniWatch is grounded in verified multi-camera CCTV footage. Below is a complete visual tour of all 12 operational capabilities:
+
+### 1. Multi-Camera Grounded Conversational Queries
+Interrogate distinct cameras using everyday language. OmniWatch resolves exact camera IDs, ISO timestamp windows, visual bounding boxes, and confidence scores.
 
 <p align="center">
-  <img src="docs/screenshots/01_search_console_tactical_hud.png" width="49%" alt="Tactical Search Console" />
-  <img src="docs/screenshots/02_tours_bag_search_dossier.png" width="49%" alt="Grounded Intelligence Report - Tours" />
+  <img src="docs/screenshots/01_search_yokohama_news_reader.png" width="49%" alt="Yokohama Crossroad Camera Query" />
+  <img src="docs/screenshots/02_search_tours_bag_carrier.png" width="49%" alt="Tours Pedestrian Plaza Bag Detection" />
 </p>
 
-> **Sample Query Verified:** *"Show me a person carrying a bag"* resolved instantly to **Tours Pedestrian Plaza** at `09:05:03 UTC` (Tracklet `#108`, `89.1%` match confidence, attributes: `color: black`, `carries: backpack`).
+> **Left:** Query *"Yokohama news reader"* resolving to Yokohama CCTV Tracklet `#338` (`94.2%` confidence).  
+> **Right:** Query *"Show me a person carrying a bag"* resolving to Tours Pedestrian Plaza Tracklet `#108` (`89.1%` confidence, attributes: `color: black`, `carries: backpack`).
 
 ---
 
-### 2. Multi-Camera Wall & Clarify-Once Persistent Spatial Memory
-Monitor synchronized multi-stream CCTV topologies (`Yokohama Crossroad`, `Tours Pedestrian Plaza`, `Cam 1 North Gate`, `Cam 2 East Perimeter`). When unfamiliar colloquial names appear (e.g., *"loading dock"*), OmniWatch triggers the Clarify-Once protocol, saving permanent bindings to SQLite WAL.
+### 2. Temporal Vehicle Queries & Spatial Referent Resolution
+Query large vehicles across time boundaries or reference named zones resolved through Clarify-Once persistent memory.
 
 <p align="center">
-  <img src="docs/screenshots/03_camera_wall_grid.png" width="49%" alt="Camera Wall Grid" />
-  <img src="docs/screenshots/04_clarify_once_spatial_memory.png" width="49%" alt="Clarify-Once Knowledge Base" />
+  <img src="docs/screenshots/03_search_bus_truck_detection.png" width="49%" alt="Large Vehicle Temporal Query" />
+  <img src="docs/screenshots/04_search_east_corridor_person.png" width="49%" alt="East Corridor Person Detection" />
+</p>
+
+> **Left:** Query *"When did a bus or truck appear?"* resolving to vehicle Tracklet `#248` at `09:07:26 UTC`.  
+> **Right:** Query *"Find someone in east corridor"* resolving through Clarify-Once KB to Cam 2 Tracklet `#388` (`92.3%` confidence).
+
+---
+
+### 3. Forensic Evidence Dossier: Cyber Reticle & 5-Second Video Player
+Inspect native keyframes with exact target reticle bounding boxes, or play 5-second on-demand MP4 clips sliced with FFmpeg featuring multi-speed controls (`0.5x`, `1.0x`, `1.5x`, `2.0x`).
+
+<p align="center">
+  <img src="docs/screenshots/05_evidence_keyframe_reticle_modal.png" width="49%" alt="Cyber Reticle Keyframe Target Lock" />
+  <img src="docs/screenshots/06_evidence_video_clip_modal.png" width="49%" alt="5-Second On-Demand Video Player" />
 </p>
 
 ---
 
-### 3. Interactive ROI Canvas & Cyber Reticle Evidence Dossier
-Operators can drag-and-drop custom Regions of Interest (ROI) directly onto camera snapshot feeds via an HTML5 canvas. Every evidence keyframe features an exact native bounding box reticle lock.
+### 4. Cross-Camera Re-ID Timeline & Clarify-Once Canvas ROI Modal
+Reconstruct a suspect's multi-camera transit path across camera topologies, or draw custom Region of Interest (ROI) bounding rectangles on live feeds using an HTML5 canvas.
 
 <p align="center">
-  <img src="docs/screenshots/05_clarify_once_roi_canvas_modal.png" width="49%" alt="Interactive ROI Canvas Modal" />
-  <img src="docs/screenshots/06_evidence_keyframe_reticle_modal.png" width="49%" alt="Keyframe Cyber Reticle Modal" />
+  <img src="docs/screenshots/07_cross_camera_reid_timeline_modal.png" width="49%" alt="Cross-Camera Re-ID Path Timeline" />
+  <img src="docs/screenshots/08_clarify_once_roi_canvas_modal.png" width="49%" alt="Clarify-Once Canvas ROI Modal" />
+</p>
+
+> **Left:** Cross-Camera Re-ID linking suspect trajectory across `Cam 1` &rarr; `Cam 2` &rarr; `Tours` with transit times (`Δt: 198.0s` and `Δt: 75.0s`).  
+> **Right:** Clarify-Once spatial memory modal triggered by *"Where is the loading dock?"* with custom ROI canvas drawing.
+
+---
+
+### 5. Tactical Camera Wall & Permanent SQLite Spatial Memory
+Monitor synchronized multi-stream CCTV feeds (`Yokohama`, `Tours`, `Cam 1`, `Cam 2`) with live telemetry, and manage permanent SQLite spatial memory bindings that survive application restarts.
+
+<p align="center">
+  <img src="docs/screenshots/09_tactical_camera_wall_grid.png" width="49%" alt="Tactical Camera Wall 4-Feed Grid" />
+  <img src="docs/screenshots/10_clarify_once_knowledge_base.png" width="49%" alt="Durable SQLite Knowledge Base Table" />
 </p>
 
 ---
 
-### 4. Forensic Video Evidence Player & Standing Security Alerts
-Inspect 5-second on-demand MP4 video clips sliced on the fly with FFmpeg with variable playback speeds (`0.5x`, `1.0x`, `1.5x`, `2.0x`). Register continuous rule-based standing queries that audit events in real time.
+### 6. Standing Surveillance Alerts & Verified VLM Pipeline Mode
+Register automated standing query rules evaluated continuously during ingestion, or switch to deep VLM verification with full slot telemetry (intent, object, color, latency).
 
 <p align="center">
-  <img src="docs/screenshots/07_evidence_video_clip_modal.png" width="49%" alt="5-Second Evidence Video Player" />
-  <img src="docs/screenshots/08_standing_alerts_audit_feed.png" width="49%" alt="Standing Alerts Audit Feed" />
+  <img src="docs/screenshots/11_standing_surveillance_alerts_feed.png" width="49%" alt="Standing Surveillance Alerts Feed" />
+  <img src="docs/screenshots/12_verified_vlm_pipeline_mode.png" width="49%" alt="Verified Pipeline Mode Telemetry" />
 </p>
 
 ---
@@ -143,7 +172,7 @@ omniwatch_pack/
 ├── web/                                # Tactical Surveillance HUD Frontend (HTML5, Vanilla CSS, SPA JS)
 ├── docs/                               # Formal PRD, Architecture, Test Plans & Flowcharts
 │   ├── FLOWCHARTS.md                   # Comprehensive Mermaid Diagrams & Schematics
-│   └── screenshots/                    # High-Resolution Interface Evidence
+│   └── screenshots/                    # 12 Distinct High-Resolution Interface Evidence Captures
 ├── data/                               # CCTV Footage, SQLite WAL Database, FAISS Indices
 ├── eval/                               # Automated Benchmark Harness & Empirical Results
 ├── omni_live.py                        # GPU Real-Time Multi-Camera Tracking Stream (Port 8100)

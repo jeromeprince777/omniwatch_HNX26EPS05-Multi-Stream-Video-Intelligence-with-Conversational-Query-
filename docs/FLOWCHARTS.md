@@ -35,7 +35,7 @@ omniwatch_pack/
 │   ├── 04_DATA_PLAN.md                 # Public CCTV & Campus dataset manifest
 │   ├── 06_TEST_PLAN.md                 # Test matrices & verification criteria
 │   ├── FLOWCHARTS.md                   # Complete architectural flowcharts (This document)
-│   └── screenshots/                    # High-resolution HUD interface captures
+│   └── screenshots/                    # 12 Distinct High-Resolution Interface Evidence Captures
 │
 ├── data/                               # Dataset & Persistent Cache (Gitignored per AGENTS.md)
 │   ├── public_cctv/                    # Raw multi-camera MP4 video streams
@@ -60,8 +60,8 @@ omniwatch_pack/
 ## 2. High-Level End-to-End System Flowchart
 
 <p align="center">
-  <img src="screenshots/01_search_console_tactical_hud.png" width="49%" alt="Tactical Search Console" />
-  <img src="screenshots/02_tours_bag_search_dossier.png" width="49%" alt="Grounded Intelligence Report - Tours" />
+  <img src="screenshots/01_search_yokohama_news_reader.png" width="49%" alt="Yokohama Crossroad Camera Query" />
+  <img src="screenshots/02_search_tours_bag_carrier.png" width="49%" alt="Tours Pedestrian Plaza Bag Detection" />
 </p>
 
 ```mermaid
@@ -111,7 +111,7 @@ flowchart TD
 ## 3. Video Ingestion & Multi-Object Tracking Pipeline
 
 <p align="center">
-  <img src="screenshots/03_camera_wall_grid.png" width="98%" alt="Camera Wall Grid" />
+  <img src="screenshots/09_tactical_camera_wall_grid.png" width="98%" alt="Camera Wall Grid" />
 </p>
 
 ```mermaid
@@ -145,8 +145,8 @@ flowchart LR
 ## 4. Conversational NL Query Parsing & Hybrid Retrieval
 
 <p align="center">
-  <img src="screenshots/06_evidence_keyframe_reticle_modal.png" width="49%" alt="Evidence Reticle Target" />
-  <img src="screenshots/07_evidence_video_clip_modal.png" width="49%" alt="5s Evidence Video Player" />
+  <img src="screenshots/05_evidence_keyframe_reticle_modal.png" width="49%" alt="Evidence Reticle Target" />
+  <img src="screenshots/06_evidence_video_clip_modal.png" width="49%" alt="5s Evidence Video Player" />
 </p>
 
 ```mermaid
@@ -191,8 +191,8 @@ sequenceDiagram
 ## 5. Clarify-Once Spatial Memory Protocol (State Machine)
 
 <p align="center">
-  <img src="screenshots/05_clarify_once_roi_canvas_modal.png" width="49%" alt="Interactive ROI Canvas Modal" />
-  <img src="screenshots/04_clarify_once_spatial_memory.png" width="49%" alt="Clarify-Once Knowledge Base Table" />
+  <img src="screenshots/08_clarify_once_roi_canvas_modal.png" width="49%" alt="Interactive ROI Canvas Modal" />
+  <img src="screenshots/10_clarify_once_knowledge_base.png" width="49%" alt="Clarify-Once Knowledge Base Table" />
 </p>
 
 ```mermaid
@@ -224,7 +224,7 @@ stateDiagram-v2
 ## 6. Continuous Standing Surveillance Alerts Engine
 
 <p align="center">
-  <img src="screenshots/08_standing_alerts_audit_feed.png" width="98%" alt="Standing Alerts Audit Feed" />
+  <img src="screenshots/11_standing_surveillance_alerts_feed.png" width="98%" alt="Standing Alerts Audit Feed" />
 </p>
 
 ```mermaid
@@ -239,7 +239,33 @@ graph TD
 
 ---
 
-## 7. Requirements Traceability Matrix
+## 7. Cross-Camera Spatio-Temporal Re-ID & Timeline Graph
+
+<p align="center">
+  <img src="screenshots/07_cross_camera_reid_timeline_modal.png" width="98%" alt="Cross-Camera Re-ID Timeline Modal" />
+</p>
+
+```mermaid
+flowchart TD
+    T1[Observation Tracklet #376<br/>Camera: Cam 1 - North Gate Entry<br/>Time: 09:00:00 -> 09:00:15 UTC]
+    
+    T2[Observation Tracklet #388<br/>Camera: Cam 2 - East Perimeter Corridor<br/>Time: 09:03:33 -> 09:03:48 UTC]
+    
+    T3[Observation Tracklet #108<br/>Camera: Tours Pedestrian Plaza<br/>Time: 09:05:03 -> 09:05:22 UTC]
+    
+    T1 -->|Δt: 198.0s Transit<br/>Cosine Similarity: 0.892| T2
+    T2 -->|Δt: 75.0s Transit<br/>Cosine Similarity: 0.884| T3
+    
+    subgraph SUMMARY["RECONSTRUCTED CHRONOLOGICAL TRAJECTORY"]
+        T1
+        T2
+        T3
+    end
+```
+
+---
+
+## 8. Requirements Traceability Matrix
 
 | Requirement ID | Module | Implementation Description | Verification |
 |---|---|---|---|
