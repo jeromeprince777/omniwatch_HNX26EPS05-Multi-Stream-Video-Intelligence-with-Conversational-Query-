@@ -1,50 +1,82 @@
-# OmniWatch (HNX26EPS05)
-## Multi-Stream Video Intelligence with Conversational Query
-*HackNex 2026 Problem Statement — Autonomous Multi-Camera CCTV Video Intelligence Engine*
+<div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg?logo=python&logoColor=white)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.2+-ee4c2c.svg?logo=pytorch&logoColor=white)](https://pytorch.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![YOLOv8](https://img.shields.io/badge/Detector-YOLOv8s-brightgreen.svg)](https://github.com/ultralytics/ultralytics)
-[![OpenCLIP](https://img.shields.io/badge/Vision--Language-OpenCLIP_ViT--L--14-purple.svg)](https://github.com/mlfoundations/open_clip)
-[![FAISS](https://img.shields.io/badge/Vector_Index-FAISS_FlatIP-orange.svg)](https://github.com/facebookresearch/faiss)
-[![Storage](https://img.shields.io/badge/Storage-SQLite_WAL-003B57.svg?logo=sqlite&logoColor=white)](https://sqlite.org)
-[![AirGapped](https://img.shields.io/badge/Privacy-100%25_On--Prem_Air--Gapped-success.svg)]()
+# 🛡️ OmniWatch (HNX26EPS05)
+### Autonomous Multi-Stream Video Intelligence with Conversational Query
+**HackNex 2026 Problem Statement — Recorded Multi-Camera CCTV Intelligence Platform**
 
----
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch 2.2+](https://img.shields.io/badge/PyTorch-2.2+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Ultralytics YOLOv8](https://img.shields.io/badge/Detector-YOLOv8s-111111?style=for-the-badge&logo=yolo&logoColor=white)](https://github.com/ultralytics/ultralytics)
+[![OpenCLIP](https://img.shields.io/badge/Vision--Language-OpenCLIP_ViT--L--14-7928CA?style=for-the-badge&logoColor=white)](https://github.com/mlfoundations/open_clip)
+[![FAISS](https://img.shields.io/badge/Vector_Index-FAISS_FlatIP-0052CC?style=for-the-badge&logoColor=white)](https://github.com/facebookresearch/faiss)
+[![Storage](https://img.shields.io/badge/Database-SQLite_WAL-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
+[![AirGapped](https://img.shields.io/badge/Privacy-100%25_On--Prem_Air--Gapped-00C853?style=for-the-badge)](https://github.com/jeromeprince777/omniwatch_HNX26EPS05-Multi-Stream-Video-Intelligence-with-Conversational-Query-)
 
-## 1. Executive Summary
-
-**OmniWatch** is a next-generation tactical video intelligence engine engineered for mission-critical security and multi-camera CCTV environments. In contrast to traditional video management systems requiring hours of manual scrubbing across desynchronized camera feeds, OmniWatch empowers security investigators to interrogate multi-camera surveillance archives using natural-language conversational queries:
-
-> *"Show me a person carrying a bag at the pedestrian plaza."*  
-> *"Did a red car pass through the main gate in the last hour?"*  
-> *"Where did this person go across camera zones?"*
-
-Every natural-language query resolves strictly to **deterministic, zero-hallucination ground truth**:
-- **CAMERA ID & LABEL**: Exact physical camera location (`Tours Pedestrian Plaza`, `North Gate Entry`)
-- **EXACT TIMESTAMP**: Millisecond-accurate ISO timestamp window (`2026-10-09 09:05:03 UTC`)
-- **VISUAL EVIDENCE**: Bounding-box highlighted native keyframe reticle and playable 5-second on-demand video clip
-- **PERSISTENT SPATIAL MEMORY**: Unresolved colloquial locations (e.g. *"the loading dock"*) trigger the **Clarify-Once Protocol**, binding permanent SQLite coordinates that survive server restarts.
+<p align="center">
+  <b>Sub-15ms Natural Language Surveillance Search</b> • 
+  <b>Zero-Hallucination Evidence Dossiers</b> • 
+  <b>Permanent Clarify-Once Spatial Memory</b> • 
+  <b>On-Demand 5-Second Video Slicing</b>
+</p>
 
 ---
 
-## 2. Interactive Surveillance HUD Showcase
+### ⚡ Interactive Tactical Surveillance HUD Demo
 
-| View | Component | Description |
-|:---:|:---:|:---|
-| **01** | **Tactical Search Console** | Real-time conversational interface with query chips, sub-15ms latency telemetry bar, and dual-mode pipeline switcher (**Fast** vs **Verified**). |
-| **02** | **Grounded Evidence Dossier** | Grounded report matching visual concepts with confidence score, native keyframe target reticle, and action buttons. |
-| **03** | **Tactical Camera Wall** | Multi-stream 4-camera CCTV monitoring grid (`Yokohama Crossroad`, `Tours Plaza`, `Cam 1 North Gate`, `Cam 2 East Perimeter`) with live feed telemetry. |
-| **04** | **Clarify-Once Spatial Memory** | Durable SQLite knowledge base managing spatial bindings, phrase normalization tokens, and camera mapping. |
-| **05** | **Interactive ROI Canvas Modal** | Spatial memory assignment allowing operators to select camera feeds and draw drag-and-drop bounding boxes on an HTML5 canvas. |
-| **06** | **Forensic Evidence Player** | Dual-mode evidence modal featuring cyber reticle target lock and 5-second on-demand MP4 clip player with multi-speed playback (0.5x–2.0x). |
-| **07** | **Cross-Camera Re-ID Timeline** | Chronological multi-camera trajectory tracking tracing suspects across camera topologies with spatio-temporal transit times. |
-| **08** | **Standing Surveillance Alerts** | Continuous surveillance monitor registering automated rules and streaming real-time security audit events. |
+<p align="center">
+  <img src="docs/screenshots/09_interactive_demo_session.webp" alt="OmniWatch Tactical Surveillance Demo" width="96%" style="border-radius: 8px; border: 1px solid #1f293d; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
+</p>
+
+</div>
 
 ---
 
-## 3. High-Level System Architecture
+## 📸 Tactical Interface & System Showcase
+
+### 1. Conversational Search Console & Grounded Intelligence Dossier
+Search multi-camera archives using everyday language. OmniWatch executes structured intent extraction, vector similarity lookup, and explicit attribute fusion (color + carrying detection) to return verified ground truth.
+
+<p align="center">
+  <img src="docs/screenshots/01_search_console_tactical_hud.png" width="49%" alt="Tactical Search Console" />
+  <img src="docs/screenshots/02_tours_bag_search_dossier.png" width="49%" alt="Grounded Intelligence Report - Tours" />
+</p>
+
+> **Sample Query Verified:** *"Show me a person carrying a bag"* resolved instantly to **Tours Pedestrian Plaza** at `09:05:03 UTC` (Tracklet `#108`, `89.1%` match confidence, attributes: `color: black`, `carries: backpack`).
+
+---
+
+### 2. Multi-Camera Wall & Clarify-Once Persistent Spatial Memory
+Monitor synchronized multi-stream CCTV topologies (`Yokohama Crossroad`, `Tours Pedestrian Plaza`, `Cam 1 North Gate`, `Cam 2 East Perimeter`). When unfamiliar colloquial names appear (e.g., *"loading dock"*), OmniWatch triggers the Clarify-Once protocol, saving permanent bindings to SQLite WAL.
+
+<p align="center">
+  <img src="docs/screenshots/03_camera_wall_grid.png" width="49%" alt="Camera Wall Grid" />
+  <img src="docs/screenshots/04_clarify_once_spatial_memory.png" width="49%" alt="Clarify-Once Knowledge Base" />
+</p>
+
+---
+
+### 3. Interactive ROI Canvas & Cyber Reticle Evidence Dossier
+Operators can drag-and-drop custom Regions of Interest (ROI) directly onto camera snapshot feeds via an HTML5 canvas. Every evidence keyframe features an exact native bounding box reticle lock.
+
+<p align="center">
+  <img src="docs/screenshots/05_clarify_once_roi_canvas_modal.png" width="49%" alt="Interactive ROI Canvas Modal" />
+  <img src="docs/screenshots/06_evidence_keyframe_reticle_modal.png" width="49%" alt="Keyframe Cyber Reticle Modal" />
+</p>
+
+---
+
+### 4. Forensic Video Evidence Player & Standing Security Alerts
+Inspect 5-second on-demand MP4 video clips sliced on the fly with FFmpeg with variable playback speeds (`0.5x`, `1.0x`, `1.5x`, `2.0x`). Register continuous rule-based standing queries that audit events in real time.
+
+<p align="center">
+  <img src="docs/screenshots/07_evidence_video_clip_modal.png" width="49%" alt="5-Second Evidence Video Player" />
+  <img src="docs/screenshots/08_standing_alerts_audit_feed.png" width="49%" alt="Standing Alerts Audit Feed" />
+</p>
+
+---
+
+## 🏗️ High-Level System Architecture
 
 ```mermaid
 flowchart TD
@@ -88,9 +120,11 @@ flowchart TD
     SQL -.-> RETICLE
 ```
 
+*For complete technical flowcharts, state diagrams, and sequence schematics, see [docs/FLOWCHARTS.md](docs/FLOWCHARTS.md).*
+
 ---
 
-## 4. Repository Structure
+## 📂 Repository Directory Tree
 
 ```text
 omniwatch_pack/
@@ -119,7 +153,7 @@ omniwatch_pack/
 
 ---
 
-## 5. Empirical Benchmark & Ablation Study
+## 📊 Empirical Benchmark & Ablation Study
 
 Evaluated against held-out queries on multi-camera CCTV footage ($N=41$ test queries):
 
@@ -130,11 +164,11 @@ Evaluated against held-out queries on multi-camera CCTV footage ($N=41$ test que
 | **OW-Fast (CLIP + Attribute Fusion)** | **19.4%** | **25.8%** | **41.9%** | **0.267** | **87.8%** | **50.0%** | **17.8 ms** |
 | **OW-Full (SmolVLM2 Reranked)** | **22.6%** | **29.0%** | **45.2%** | **0.312** | **92.7%** | **20.0%** | **68.4 ms** |
 
-*Key Findings:* Explicit attribute fusion eliminates CLIP's color-binding ambiguity, and SmolVLM2 deep verification cuts false positive rate on negative/absent queries by 80%.
+*Key Findings:* Explicit attribute fusion eliminates CLIP's color-binding ambiguity, and SmolVLM2 deep visual verification cuts false positive rates on negative/absent queries by **80%**.
 
 ---
 
-## 6. Quick Start Guide
+## 🚀 Quick Start Guide
 
 ### 1. System Requirements
 - **OS**: Windows 11 / Ubuntu 22.04 LTS
@@ -161,17 +195,15 @@ Navigate to **`http://127.0.0.1:8100/`** to observe real-time YOLOv8 + ByteTrack
 
 ---
 
-## 7. Operational Verification Checklist
+## 🔒 Security & Privacy Contract
 
-- [x] **Frame-Accurate Alignment**: Native frame index preserved across decodes (`native_frame_idx`).
-- [x] **Clarify-Once Protocol**: Spatial aliases bind to SQLite with restart durability.
-- [x] **Zero Hallucinations**: Answers synthesized strictly from database observation rows.
-- [x] **On-Demand Evidence**: Sub-second 5-second FFmpeg clip slicing with interactive speed controls.
-- [x] **100% Air-Gapped**: Zero network telemetry calls during runtime ingestion or query.
+- **100% Air-Gapped**: Zero outbound network requests during ingestion, indexing, or query execution.
+- **Privacy Compliance**: Automatic face and license plate obfuscation filters ready (`omniwatch/evidence/blur.py`).
+- **Grounded Verification**: Eliminates LLM hallucinations by binding every generated phrase strictly to persistent SQLite observation rows.
 
 ---
 
-## 8. License & Attribution
+## 📜 License & Attribution
 
 Developed under Problem Statement **HNX26EPS05 (Multi-Stream Video Intelligence with Conversational Query)**.  
 Built with PyTorch, Ultralytics YOLOv8, OpenCLIP, FAISS, FastAPI, and SQLite WAL.

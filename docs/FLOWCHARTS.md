@@ -10,39 +10,17 @@ Comprehensive visual engineering documentation, pipeline flowcharts, state diagr
 omniwatch_pack/
 │
 ├── omniwatch/                          # Core Python Engine
-│   ├── api/                            # FastAPI REST & WebSocket Server
-│   │   ├── main.py                     # App entry point, REST routes, static HUD mount
-│   │   └── schemas.py                  # Pydantic v2 request/response contracts
-│   ├── ingest/                         # Multi-Stream Ingestion Engine
-│   │   ├── decode.py                   # PyAV / OpenCV native frame decoder (@ 2 FPS)
-│   │   └── pipeline.py                 # Idempotent batch ingestion orchestrator
-│   ├── detect/                         # Neural Detection Layer
-│   │   └── detector.py                 # YOLOv8s / YOLO-World open-vocab adapters
-│   ├── embed/                          # Vision-Language Embedding & Feature Extraction
-│   │   ├── encoder.py                  # OpenCLIP ViT-L-14 / ViT-B-32 image/text embeddings
-│   │   └── attrs.py                    # Dominant color clustering & person-bag spatial carrier
-│   ├── track/                          # Multi-Object Tracking (MOT)
-│   │   └── tracker.py                  # Per-camera ByteTrack Kalman state filter
-│   ├── index/                          # Vector Indexing
-│   │   └── vector.py                   # FAISS FlatIP L2-normalized vector wrapper
-│   ├── query/                          # Conversational Query Pipeline
-│   │   ├── parser.py                   # Intent extraction (LLM + Deterministic Regex fallback)
-│   │   ├── resolver.py                 # Clarify-Once KB & reference_now temporal resolver
-│   │   ├── retrieve.py                 # Multi-stage filtered vector search & attribute fusion
-│   │   ├── rerank.py                   # Deep visual verification (SmolVLM2 / OpenCLIP)
-│   │   └── answer.py                   # Deterministic, zero-hallucination grounded templates
-│   ├── kb/                             # Spatial Memory Management
-│   │   ├── normalize.py                # Token & phrase normalization
-│   │   └── store.py                    # SQLite durable referents CRUD & audit logger
-│   ├── evidence/                       # Forensic Evidence Generation
-│   │   ├── thumbs.py                   # Native keyframe crop & cyber reticle renderer
-│   │   └── clips.py                    # On-demand FFmpeg 5-second video slicer & cache
-│   ├── alerts/                         # Continuous Surveillance Rule Engine
-│   │   └── monitor.py                  # Standing query rule evaluation & audit table writer
-│   ├── reid/                           # Cross-Camera Association
-│   │   └── linker.py                   # Spatio-temporal transit & appearance feature linker
-│   ├── config.py                       # Pydantic / dataclass settings & presets
-│   └── db.py                           # SQLite WAL connection & schema migrations
+│   ├── api/                            # FastAPI REST & WebSocket Server (main.py, schemas.py)
+│   ├── ingest/                         # Multi-Stream Ingestion Engine (decode.py, pipeline.py)
+│   ├── detect/                         # Neural Detection Layer (YOLOv8s, YOLO-World)
+│   ├── embed/                          # OpenCLIP ViT-L-14 Embeddings & Color/Carries Attributes
+│   ├── track/                          # Per-Camera ByteTrack Kalman State Filter
+│   ├── index/                          # FAISS FlatIP Exact Vector Indexing Wrapper
+│   ├── query/                          # Parser, Resolver, Hybrid Retrieval, VLM Reranking
+│   ├── kb/                             # Clarify-Once Spatial Memory (SQLite CRUD & Normalizer)
+│   ├── evidence/                       # Keyframe Reticle Highlighter & FFmpeg 5s Clip Slicer
+│   ├── alerts/                         # Standing Queries & Continuous Audit Rule Engine
+│   └── reid/                           # Cross-Camera Appearance & Spatio-Temporal Linker
 │
 ├── web/                                # Tactical Surveillance HUD (Frontend)
 │   ├── index.html                      # Cyberpunk-tactical surveillance interface layout
@@ -69,14 +47,8 @@ omniwatch_pack/
 │   ├── run_ablation.py                 # 4-stage ablation harness
 │   └── results.md                      # Verified empirical benchmark numbers
 │
-├── models/                             # Checkpoints & Weights
-│   └── MANIFEST.md                     # Model manifest (name, hash, license, source)
-│
+├── models/                             # Checkpoints & Weights (MANIFEST.md tracked)
 ├── scripts/                            # Operational & Verification Scripts
-│   ├── check_env.py                    # CUDA & environment validation
-│   ├── contact_sheet.py                # Visual bounding-box contact sheet generator
-│   └── debug_bbox.py                   # Frame-box coordinate alignment inspector
-│
 ├── omni_live.py                        # Real-time multi-camera tracking stream (port 8100)
 ├── omni_min.py                         # Minimal CLI search & query verification tool
 ├── start_omniwatch.bat                 # 1-Click Windows server launcher
@@ -86,6 +58,11 @@ omniwatch_pack/
 ---
 
 ## 2. High-Level End-to-End System Flowchart
+
+<p align="center">
+  <img src="screenshots/01_search_console_tactical_hud.png" width="49%" alt="Tactical Search Console" />
+  <img src="screenshots/02_tours_bag_search_dossier.png" width="49%" alt="Grounded Intelligence Report - Tours" />
+</p>
 
 ```mermaid
 flowchart TD
@@ -133,6 +110,10 @@ flowchart TD
 
 ## 3. Video Ingestion & Multi-Object Tracking Pipeline
 
+<p align="center">
+  <img src="screenshots/03_camera_wall_grid.png" width="98%" alt="Camera Wall Grid" />
+</p>
+
 ```mermaid
 flowchart LR
     A[MP4 Stream] --> B[OpenCV / PyAV Decoder]
@@ -162,6 +143,11 @@ flowchart LR
 ---
 
 ## 4. Conversational NL Query Parsing & Hybrid Retrieval
+
+<p align="center">
+  <img src="screenshots/06_evidence_keyframe_reticle_modal.png" width="49%" alt="Evidence Reticle Target" />
+  <img src="screenshots/07_evidence_video_clip_modal.png" width="49%" alt="5s Evidence Video Player" />
+</p>
 
 ```mermaid
 sequenceDiagram
@@ -204,6 +190,11 @@ sequenceDiagram
 
 ## 5. Clarify-Once Spatial Memory Protocol (State Machine)
 
+<p align="center">
+  <img src="screenshots/05_clarify_once_roi_canvas_modal.png" width="49%" alt="Interactive ROI Canvas Modal" />
+  <img src="screenshots/04_clarify_once_spatial_memory.png" width="49%" alt="Clarify-Once Knowledge Base Table" />
+</p>
+
 ```mermaid
 stateDiagram-v2
     [*] --> QueryReceived: User submits natural-language query
@@ -230,51 +221,25 @@ stateDiagram-v2
 
 ---
 
-## 6. Dual Pipeline Modes: Fast vs Verified Architecture
+## 6. Continuous Standing Surveillance Alerts Engine
+
+<p align="center">
+  <img src="screenshots/08_standing_alerts_audit_feed.png" width="98%" alt="Standing Alerts Audit Feed" />
+</p>
 
 ```mermaid
 graph TD
-    Q[User Natural Language Query] --> P[Query Parser]
-    P --> R[KB Location Resolver]
-    R --> S[Vector Candidate Retrieval]
-    
-    subgraph DUAL_MODES["Pipeline Execution Modes"]
-        S -->|Mode: FAST| FAST_PATH[Direct Attribute Fusion<br/>& Temporal Smoothing]
-        FAST_PATH -->|Latency: sub-25ms| OUT_FAST[Grounded Result Dossier<br/>Source: YOLOv8s + OpenCLIP]
-        
-        S -->|Mode: VERIFIED| VLM_PATH[SmolVLM2 Visual Verification<br/>Top-3 Candidate Reranking]
-        VLM_PATH -->|Deep Cross-Modal VQA| OUT_VERIFIED[Verified Intelligence Dossier<br/>Source: SmolVLM2 Reranked]
-    end
-    
-    OUT_FAST --> HUD[Surveillance HUD]
-    OUT_VERIFIED --> HUD
+    RULE[Operator Registers Standing Rule<br/>e.g. 'Alert if person enters east corridor'] --> MONITORS[(SQLite standing_queries table)]
+    INGEST[Video Ingestion / Live Stream Feed] --> DETECT[Observation Tracklet Created]
+    DETECT --> EVAL{Matches Active Monitor?}
+    EVAL -->|Yes| ALERT[Emit Alert Event & Write to SQLite alerts table]
+    ALERT --> FEED[Real-Time Audit Event Feed & Audio Chime]
+    FEED --> PLAY[Operator Clicks 'PLAY CLIP' -> 5s Forensic Verification]
 ```
 
 ---
 
-## 7. Cross-Camera Spatio-Temporal Re-ID & Timeline Graph
-
-```mermaid
-flowchart TD
-    T1[Observation Tracklet #376<br/>Camera: Cam 1 - North Gate Entry<br/>Time: 09:00:00 -> 09:00:15 UTC]
-    
-    T2[Observation Tracklet #388<br/>Camera: Cam 2 - East Perimeter Corridor<br/>Time: 09:03:33 -> 09:03:48 UTC]
-    
-    T3[Observation Tracklet #108<br/>Camera: Tours Pedestrian Plaza<br/>Time: 09:05:03 -> 09:05:22 UTC]
-    
-    T1 -->|Δt: 198.0s Transit<br/>Cosine Similarity: 0.892| T2
-    T2 -->|Δt: 75.0s Transit<br/>Cosine Similarity: 0.884| T3
-    
-    subgraph SUMMARY["RECONSTRUCTED CHRONOLOGICAL TRAJECTORY"]
-        T1
-        T2
-        T3
-    end
-```
-
----
-
-## 8. Requirements Traceability Matrix
+## 7. Requirements Traceability Matrix
 
 | Requirement ID | Module | Implementation Description | Verification |
 |---|---|---|---|
