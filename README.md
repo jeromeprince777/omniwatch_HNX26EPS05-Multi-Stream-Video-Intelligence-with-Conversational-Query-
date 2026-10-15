@@ -60,7 +60,7 @@ Reconstruct a suspect's multi-camera transit path across camera topologies, or d
 
 ---
 
-### 5. Tactical Camera Wall & Permanent SQLite Spatial Memory
+### 3. Tactical Camera Wall & Permanent SQLite Spatial Memory
 Monitor synchronized multi-stream CCTV feeds (`Yokohama`, `Tours`, `Cam 1`, `Cam 2`) with live telemetry, and manage permanent SQLite spatial memory bindings that survive application restarts.
 
 <p align="center">
@@ -70,7 +70,7 @@ Monitor synchronized multi-stream CCTV feeds (`Yokohama`, `Tours`, `Cam 1`, `Cam
 
 ---
 
-### 3. Standing Surveillance Alerts & Verified VLM Pipeline Mode
+### 4. Standing Surveillance Alerts & Verified VLM Pipeline Mode
 Register automated standing query rules evaluated continuously during ingestion, or switch to deep VLM verification with full slot telemetry (intent, object, color, latency).
 
 <p align="center">
