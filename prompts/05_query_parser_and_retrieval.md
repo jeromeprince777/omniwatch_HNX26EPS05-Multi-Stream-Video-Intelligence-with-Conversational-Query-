@@ -1,0 +1,11 @@
+# 05 — Query parsing, time resolution, retrieval, answers
+**Read:** docs/00_PRD (FR-QRY, FR-EVD), docs/01_ARCHITECTURE (4, 5, 9), docs/02 (method).
+
+**Task:**
+1. `query/parser.py`: implement `ParsedQuery` (pydantic) exactly as in docs/01 section 4. Two parsers: (a) LLM parser using a local model through Ollama (verify the Ollama HTTP API and JSON-mode parameters before coding; model name from config; if Ollama or the model is missing, log a WARNING and use the rule parser), (b) rule parser using regex/keyword lists for colors, object classes, intents (did/was/is -> exists; show/find -> find; when -> when; how many -> count), location phrase extraction (noun phrases after "at/in/near/through/by the"), and time expressions. Both validate against the same schema. Few-shot prompt examples live in `query/prompts/parser.txt` and include negatives (no location, no time).
+2. `query/resolver.py`: time resolution against `reference_now` (default max camera end): "last hour", "last 10 minutes", "between 9:10 and 9:20", "at 09:14", "this morning". Return absolute epoch intervals. Unit tests for >= 15 expressions including timezone offsets from the manifest. Location resolution hooks into the KB (prompt 06): for now accept explicit camera ids and manifest labels; unresolved phrases are returned in a list.
+3. `query/retrieve.py`: filter (camera set, time overlap, ROI, class hint) -> text prompt-ensemble embedding -> cosine against tracklet embeddings (and top-k crops) -> attribute match score -> weighted fusion -> temporal dedup -> threshold. Weights/threshold in config, tuned later on dev only. Return `Result` rows with all fields from docs/01 section 6.
+4. `query/answer.py`: deterministic templates for answer/no_match per intent. Interpolate row fields only. For `exists` negatives state the searched cameras and window. No free-form LLM text in answers.
+5. Timing instrumentation: parse/retrieve/answer ms in `latency_ms`.
+
+**Acceptance:** tests for the parser (>= 20 queries, both parsers, same schema), resolver, and a retrieval test on a small seeded index where you know the answer. A grep-based test asserts `answer.py` contains no calls to an LLM. Show 5 real queries on your ingested test data with results and timings.

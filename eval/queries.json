@@ -1,0 +1,130 @@
+[
+  {
+    "id": "q01",
+    "query": "Show me a person carrying a bag",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430476.5,
+    "expected_end": 1791430478.5,
+    "target_attribute": "carrying_bag"
+  },
+  {
+    "id": "q02",
+    "query": "Find the person with a backpack on surveillance tours",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430260.0,
+    "expected_end": 1791430265.0,
+    "target_attribute": "backpack"
+  },
+  {
+    "id": "q03",
+    "query": "Find a person on yokohama cctv",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430210.0,
+    "expected_end": 1791430218.0,
+    "target_attribute": "person"
+  },
+  {
+    "id": "q04",
+    "query": "Show me a news reader on television",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430200.0,
+    "expected_end": 1791430225.0,
+    "target_attribute": "news_anchor"
+  },
+  {
+    "id": "q05",
+    "query": "Find a car on public surveillance",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430203.5,
+    "expected_end": 1791430204.5,
+    "target_attribute": "car"
+  },
+  {
+    "id": "q06",
+    "query": "Find a bicycle",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430204.5,
+    "expected_end": 1791430205.5,
+    "target_attribute": "bicycle"
+  },
+  {
+    "id": "q07",
+    "query": "Show me a truck",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430340.5,
+    "expected_end": 1791430342.5,
+    "target_attribute": "truck"
+  },
+  {
+    "id": "q08",
+    "query": "Show me a person at main gate",
+    "expected_camera": "cam1",
+    "expected_start": 1791430200.0,
+    "expected_end": 1791430205.0,
+    "target_attribute": "person"
+  },
+  {
+    "id": "q09",
+    "query": "Did a person appear at east corridor?",
+    "expected_camera": "cam2",
+    "expected_start": 1791430212.0,
+    "expected_end": 1791430220.0,
+    "target_attribute": "person"
+  },
+  {
+    "id": "q10",
+    "query": "Find a person walking with empty hands",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430246.0,
+    "expected_end": 1791430247.5,
+    "target_attribute": "person_no_bag"
+  },
+  {
+    "id": "q11",
+    "query": "Show me a red vehicle",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430277.0,
+    "expected_end": 1791430281.0,
+    "target_attribute": "color_red"
+  },
+  {
+    "id": "q12",
+    "query": "Find a white car",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430301.5,
+    "expected_end": 1791430303.5,
+    "target_attribute": "color_white"
+  },
+  {
+    "id": "q13",
+    "query": "Find a motorcycle",
+    "expected_camera": "public_surveillance",
+    "expected_start": 1791430315.5,
+    "expected_end": 1791430317.0,
+    "target_attribute": "motorcycle"
+  },
+  {
+    "id": "q14",
+    "query": "Find a pedestrian carrying a suitcase",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430476.5,
+    "expected_end": 1791430478.5,
+    "target_attribute": "suitcase"
+  },
+  {
+    "id": "q15",
+    "query": "Show me an umbrella on yokohama cctv",
+    "expected_camera": "yokohama_cctv",
+    "expected_start": 1791430460.0,
+    "expected_end": 1791430470.0,
+    "target_attribute": "umbrella"
+  },
+  {
+    "id": "q16",
+    "query": "Did a flying spaceship appear?",
+    "expected_camera": null,
+    "expected_start": null,
+    "expected_end": null,
+    "target_attribute": "negative_control"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "run_id": "eval_test_20261008_150316",
+  "timestamp_utc": "2026-10-08T15:03:37.782038+00:00",
+  "git_hash": "development_uncommitted",
+  "split": "test",
+  "preset": "balanced",
+  "sample_fps": 2.0,
+  "detector_model": "yolov8s-world.pt",
+  "encoder_name": "ViT-B-32",
+  "encoder_pretrained": "laion2b_s34b_b79k",
+  "weights": {
+    "w_emb": 0.7,
+    "w_attr": 0.3,
+    "w_time": 0.0
+  },
+  "thresholds": {
+    "exists": 0.25,
+    "find": 0.25,
+    "when": 0.25,
+    "count": 0.28,
+    "path": 0.25
+  },
+  "device": "cuda"
+}

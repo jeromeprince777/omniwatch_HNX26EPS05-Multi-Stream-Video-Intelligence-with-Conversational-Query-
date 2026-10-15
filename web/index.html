@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniWatch — Tactical Multi-Stream Video Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Top Tactical Command Bar -->
+    <header class="hud-header">
+      <div class="hud-left">
+        <div class="hud-brand">
+          <div class="hud-brand-symbol">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="hud-brand-text">
+            <div class="hud-title-row">
+              <h1 class="hud-title">OMNIWATCH</h1>
+              <span class="hud-badge-tactical">MIL-OPS // HNX26</span>
+            </div>
+            <span class="hud-subtitle">MULTI-STREAM VIDEO INTELLIGENCE &amp; GROUNDED QUERY</span>
+          </div>
+        </div>
+        <div class="hud-status-badge">
+          <span class="hud-pulse-dot" id="system-dot"></span>
+          <span class="telemetry-label" id="system-status-text">SYSTEM: ONLINE</span>
+        </div>
+      </div>
+
+      <div class="hud-telemetry" id="top-telemetry-bar">
+        <div class="telemetry-item">
+          <span class="telemetry-tag">DEVICE</span>
+          <span class="telemetry-val" id="telemetry-device">NVIDIA RTX 4050</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-tag">STACK</span>
+          <span class="telemetry-val" id="telemetry-tracks">YOLOv8s + OpenCLIP ViT-L-14</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-tag">BACKEND</span>
+          <span class="telemetry-val" id="telemetry-vlm">omni_min (Direct Keyframe)</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-tag">WARM LATENCY</span>
+          <span class="telemetry-val highlight" id="telemetry-latency">12.5 ms</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="mode-toggle-group">
+          <span class="mode-label">PIPELINE:</span>
+          <button class="mode-btn active" id="mode-fast-btn" data-mode="fast" title="CLIP vector search + explicit attribute fusion (&lt;25ms)">
+            <span class="mode-icon">⚡</span> FAST
+          </button>
+          <button class="mode-btn" id="mode-verified-btn" data-mode="verified" title="Top-3 candidate reranking with SmolVLM2 / OpenCLIP">
+            <span class="mode-icon">🛡️</span> VERIFIED
+          </button>
+        </div>
+        <div class="hud-kbd-hint" title="Press '/' or Ctrl+K to search">
+          <kbd>/</kbd>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-body">
+      <!-- Left Tactical Rail -->
+      <aside class="sidebar-rail">
+        <nav class="nav-stack">
+          <button class="rail-btn active" id="tab-chat-btn" data-view="view-chat">
+            <svg class="rail-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span class="rail-text">Search Console</span>
+          </button>
+
+          <button class="rail-btn" id="tab-wall-btn" data-view="view-wall">
+            <svg class="rail-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span class="rail-text">Camera Wall</span>
+            <span class="rail-badge" id="camera-count-badge">4</span>
+          </button>
+
+          <button class="rail-btn" id="tab-kb-btn" data-view="view-kb">
+            <svg class="rail-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="rail-text">Clarify-Once KB</span>
+            <span class="rail-badge" id="kb-count-badge">0</span>
+          </button>
+
+          <button class="rail-btn" id="tab-alerts-btn" data-view="view-alerts">
+            <svg class="rail-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="rail-text">Standing Alerts</span>
+            <span class="rail-badge alert-badge" id="alerts-count-badge">0</span>
+          </button>
+
+          <a href="http://127.0.0.1:8100" target="_blank" class="rail-btn" id="tab-live-btn" style="text-decoration: none;" title="Open real-time query tracking stream on port 8100">
+            <svg class="rail-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span class="rail-text">Live Tracking</span>
+            <span class="rail-badge" style="background: rgba(0, 255, 180, 0.15); color: var(--emerald); border-color: var(--emerald);">8100</span>
+          </a>
+        </nav>
+
+        <div class="rail-footer">
+          <div class="model-manifest-card">
+            <div class="manifest-title">SYSTEM ARCHITECTURE</div>
+            <div class="manifest-row"><span>DETECTOR:</span> <strong>YOLOv8s</strong></div>
+            <div class="manifest-row"><span>ENCODER:</span> <strong>OpenCLIP ViT-L-14</strong></div>
+            <div class="manifest-row"><span>TRACKER:</span> <strong>ByteTrack (bytetrack.yaml)</strong></div>
+            <div class="manifest-row"><span>BACKEND:</span> <strong>omni_min + omni_live</strong></div>
+            <div class="manifest-row"><span>STORAGE:</span> <strong>SQLite WAL (omni.db)</strong></div>
+            <div class="manifest-divider"></div>
+            <div class="manifest-status-row">
+              <span class="dot-online"></span>
+              <strong>100% AIR-GAPPED &amp; ON-PREM</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center Viewport -->
+      <main class="viewport">
+        <!-- 1. Search Console View -->
+        <section id="view-chat" class="view-panel active">
+          <div class="chat-layout">
+            <!-- Left: Messages & Conversational Stream -->
+            <div class="conversation-pane">
+              <div class="messages-list" id="messages-list">
+                <!-- Welcome Card -->
+                <div class="message assistant welcome-card">
+                  <div class="hud-corner-tl"></div>
+                  <div class="hud-corner-br"></div>
+                  <div class="msg-header">
+                    <span class="msg-sender">
+                      <span class="sender-icon">◈</span> OMNIWATCH GROUNDED INTELLIGENCE CORE
+                    </span>
+                    <span class="msg-ts">READY FOR QUERIES</span>
+                  </div>
+                  <div class="msg-body">
+                    <p class="welcome-lead">
+                      Multi-camera video intelligence engine active. All queries resolve strictly to <strong>Camera ID</strong> + <strong>Exact Timestamp Window</strong> + <strong>Visual Bounding Box &amp; Video Clip</strong>. Zero hallucinated events.
+                    </p>
+                    <div class="quick-chips-wrapper">
+                      <div class="chip-label">SELECT OPERATIONAL QUERY:</div>
+                      <div class="quick-chips">
+                        <button class="query-chip" data-q="yokohama_cctv news reader">
+                          <span class="chip-icon">📺</span> Yokohama News Reader
+                        </button>
+                        <button class="query-chip" data-q="Did a red car pass through cam1?">
+                          <span class="chip-icon">🚗</span> Red car at cam1
+                        </button>
+                        <button class="query-chip" data-q="Find someone in east corridor">
+                          <span class="chip-icon">🚶</span> Person in east corridor
+                        </button>
+                        <button class="query-chip" data-q="Show me a person carrying a bag">
+                          <span class="chip-icon">🎒</span> Person with bag
+                        </button>
+                        <button class="query-chip" data-q="When did a bus or truck appear?">
+                          <span class="chip-icon">🚌</span> When did bus appear?
+                        </button>
+                        <button class="query-chip highlight" data-q="Did a person enter the secret bunker?">
+                          <span class="chip-icon">📍</span> Test Clarify-Once (Secret Bunker)
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input Bar Container -->
+              <div class="query-input-container">
+                <div class="input-telemetry-strip" id="input-telemetry">
+                  <div class="telemetry-left-strip">
+                    <span class="terminal-indicator">TERMINAL READY</span>
+                    <span class="dot-separator">•</span>
+                    <span id="active-pipeline-indicator">PIPELINE: FAST (SUB-25MS CLIP + ATTRIBUTES)</span>
+                  </div>
+                  <div class="telemetry-right-strip">
+                    <span>INDEX SEARCH: FAISS FLAT-IP</span>
+                  </div>
+                </div>
+                <div class="input-bar">
+                  <div class="terminal-prompt">&gt;</div>
+                  <input type="text" id="query-input" placeholder="Enter query (e.g., 'Did a red car pass through main gate in the last hour?')..." autocomplete="off" spellcheck="false">
+                  <button id="send-btn" class="tactical-send-btn" title="Execute Query (Enter)">
+                    <span>EXECUTE</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Query Telemetry & Inspector -->
+            <div class="telemetry-pane">
+              <div class="telemetry-panel-card">
+                <div class="panel-header">
+                  <div class="panel-title-group">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <h3>QUERY TELEMETRY</h3>
+                  </div>
+                  <span class="panel-tag" id="parser-type-tag">PARSER: IDLE</span>
+                </div>
+
+                <div class="inspector-scroll">
+                  <div class="inspector-section">
+                    <div class="inspect-label">PARSED INTENT</div>
+                    <div class="inspect-val" id="inspect-intent">--</div>
+                  </div>
+
+                  <div class="inspector-section">
+                    <div class="inspect-label">OBJECT PHRASE</div>
+                    <div class="inspect-val" id="inspect-object">--</div>
+                  </div>
+
+                  <div class="inspector-section">
+                    <div class="inspect-label">ATTRIBUTES &amp; CLASS HINT</div>
+                    <div class="inspect-tags" id="inspect-attrs">
+                      <span class="attr-pill placeholder">No active query</span>
+                    </div>
+                  </div>
+
+                  <div class="inspector-section">
+                    <div class="inspect-label">RESOLVED CAMERAS / LOCATION</div>
+                    <div class="inspect-val" id="inspect-locations">--</div>
+                  </div>
+
+                  <div class="inspector-section">
+                    <div class="inspect-label">TEMPORAL WINDOW</div>
+                    <div class="inspect-val" id="inspect-time">--</div>
+                  </div>
+
+                  <div class="inspector-section latency-box">
+                    <div class="inspect-label">WATERFALL LATENCY</div>
+                    <div class="timing-grid">
+                      <div class="timing-item">
+                        <span>Parser AST:</span>
+                        <strong id="t-parse">0.0 ms</strong>
+                      </div>
+                      <div class="timing-item">
+                        <span>FAISS Retrieval:</span>
+                        <strong id="t-retrieve">0.0 ms</strong>
+                      </div>
+                      <div class="timing-item">
+                        <span>VLM Verification:</span>
+                        <strong id="t-verify">0.0 ms</strong>
+                      </div>
+                      <div class="timing-item total">
+                        <span>Total Execution:</span>
+                        <strong id="t-total" class="highlight">0.0 ms</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Camera Wall Matrix View -->
+        <section id="view-wall" class="view-panel">
+          <div class="wall-header">
+            <div class="wall-title-area">
+              <h2>TACTICAL CAMERA WALL MATRIX</h2>
+              <div class="wall-meta">
+                <span>SITE: <code>campus_surveillance</code></span>
+                <span class="dot-separator">•</span>
+                <span>TIME-SYNC: <code>UTC EPOCH (STRICT)</code></span>
+                <span class="dot-separator">•</span>
+                <span>FEEDS: <strong id="wall-feed-count">4 ACTIVE</strong></span>
+              </div>
+            </div>
+            <div class="wall-actions">
+              <button class="tactical-btn" id="wall-refresh-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <polyline points="1 20 1 14 7 14"></polyline>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                REFRESH FEEDS
+              </button>
+            </div>
+          </div>
+          <div class="camera-wall-grid" id="camera-wall-grid">
+            <!-- Dynamically populated camera feed cards -->
+          </div>
+        </section>
+
+        <!-- 3. Knowledge Base Manager View -->
+        <section id="view-kb" class="view-panel">
+          <div class="kb-header">
+            <div>
+              <h2>CLARIFY-ONCE SPATIAL KNOWLEDGE BASE</h2>
+              <p class="kb-sub">
+                Operator-learned spatial bindings persisted durably in SQLite with <code>PRAGMA synchronous=FULL</code>. Survived restarts never re-prompt.
+              </p>
+            </div>
+            <div class="kb-actions">
+              <button class="tactical-btn primary" id="kb-add-btn">
+                <span>+</span> BIND NEW LOCATION
+              </button>
+              <button class="tactical-btn" id="kb-refresh-btn">REFRESH</button>
+            </div>
+          </div>
+
+          <div class="kb-filter-bar">
+            <div class="kb-search-box">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="kb-search-input" placeholder="Filter referents by phrase, camera, or key...">
+            </div>
+            <div class="kb-stats-summary" id="kb-stats-summary">
+              <span>0 BINDINGS SAVED</span>
+            </div>
+          </div>
+
+          <div class="kb-table-wrapper">
+            <table class="tactical-table">
+              <thead>
+                <tr>
+                  <th>PHRASE</th>
+                  <th>NORMALIZED KEY</th>
+                  <th>MAPPED CAMERAS &amp; ROI</th>
+                  <th>ORIGIN</th>
+                  <th>LAST UPDATED</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="kb-table-body">
+                <tr><td colspan="6" class="table-placeholder">Loading Knowledge Base entries...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4. Standing Alerts View (Prompt 11B) -->
+        <section id="view-alerts" class="view-panel">
+          <div class="kb-header">
+            <div>
+              <h2>STANDING QUERIES &amp; REAL-TIME SURVEILLANCE ALERTS</h2>
+              <p class="kb-sub">
+                Continuous rule-based monitors evaluated on video ingestion. Emits audit rows to SQLite <code>alerts</code> table.
+              </p>
+            </div>
+            <div class="kb-actions">
+              <button class="tactical-btn" id="alerts-refresh-btn">REFRESH ALERTS</button>
+            </div>
+          </div>
+
+          <div class="alerts-create-card">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <h3>REGISTER NEW STANDING QUERY</h3>
+              </div>
+              <span class="panel-tag">RULE TRIGGER</span>
+            </div>
+            <div class="alerts-create-body">
+              <input type="text" id="standing-rule-input" placeholder="Enter standing rule (e.g. 'Alert if person enters east corridor', 'Notify if car on cam1 after 8 am')...">
+              <button class="tactical-btn primary" id="standing-rule-submit-btn">ADD MONITORING RULE</button>
+            </div>
+          </div>
+
+          <div class="alerts-grid-layout">
+            <div class="alerts-column">
+              <h3 class="column-title">ACTIVE STANDING MONITORS (<span id="monitors-count">0</span>)</h3>
+              <div class="monitors-list" id="monitors-list">
+                <p class="table-placeholder">No active standing queries registered.</p>
+              </div>
+            </div>
+
+            <div class="alerts-column">
+              <h3 class="column-title">TRIGGERED AUDIT EVENTS (<span id="triggered-count">0</span>)</h3>
+              <div class="alerts-event-feed" id="alerts-event-feed">
+                <p class="table-placeholder">No alerts triggered yet.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Interactive Clarify-Once Modal (FR-KB-2 & FR-UI-2 compliant) -->
+  <div class="modal-overlay hidden" id="clarify-modal">
+    <div class="modal-card clarify-card">
+      <div class="modal-header alert-header">
+        <div class="modal-header-left">
+          <div class="alert-icon">📍</div>
+          <div>
+            <h3 id="clarify-modal-title">CLARIFY-ONCE SPATIAL MEMORY PROTOCOL</h3>
+            <span class="modal-subtitle">Unknown referent detected &bull; Bind once to persist permanently</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="clarify-cancel-x">&times;</button>
+      </div>
+
+      <div class="clarify-body">
+        <div class="clarify-prompt-box">
+          <div class="prompt-icon">?</div>
+          <div class="prompt-text-group">
+            <h4 id="clarify-question-text">Where is this location located?</h4>
+            <p id="clarify-phrase-text" class="clarify-phrase-highlight"></p>
+          </div>
+        </div>
+
+        <!-- Suggestion chip if available -->
+        <div class="clarify-suggestion-strip hidden" id="clarify-suggestion-strip">
+          <span class="suggestion-label">MATCH FOUND IN KB:</span>
+          <button class="suggestion-chip" id="clarify-suggestion-btn">
+            <span class="chip-text" id="clarify-suggestion-text">Use suggestion</span>
+            <span class="chip-action">Apply &rarr;</span>
+          </button>
+        </div>
+
+        <!-- Alias Option -->
+        <div class="clarify-alias-row">
+          <label for="clarify-same-as-select">OR ALIAS OF KNOWN REFERENT:</label>
+          <select id="clarify-same-as-select" class="tactical-select">
+            <option value="">-- None (Bind directly to camera below) --</option>
+          </select>
+        </div>
+
+        <div class="clarify-step-heading">
+          <span>STEP 1: SELECT CAMERA FEED</span>
+          <span class="step-sub">(Click a camera to assign)</span>
+        </div>
+
+        <!-- Camera cards with thumbnails -->
+        <div class="clarify-cameras-grid" id="clarify-cameras-grid">
+          <!-- Populated dynamically with camera cards -->
+        </div>
+
+        <div class="clarify-step-heading" style="margin-top: 16px;">
+          <span>STEP 2: OPTIONAL REGION OF INTEREST (ROI)</span>
+          <span class="step-sub">(Drag to draw rectangle on selected camera)</span>
+        </div>
+
+        <!-- Interactive ROI Canvas Area -->
+        <div class="clarify-roi-container">
+          <div class="roi-canvas-wrapper" id="roi-canvas-wrapper">
+            <canvas id="roi-canvas" width="640" height="360"></canvas>
+            <div class="roi-overlay-hint" id="roi-overlay-hint">Select a camera above to draw region of interest</div>
+          </div>
+          <div class="roi-controls-strip">
+            <div class="roi-coords-readout">
+              <span>BOUNDING ROI:</span>
+              <code id="roi-coords-text">Full Camera [0.0, 0.0, 1.0, 1.0]</code>
+            </div>
+            <button class="tactical-btn small" id="roi-clear-btn" type="button">RESET REGION</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer clarify-footer">
+        <button class="tactical-btn" id="clarify-cancel-btn">CANCEL (DO NOT SAVE)</button>
+        <button class="tactical-btn primary-glow" id="clarify-submit-btn">
+          <span>CONFIRM &amp; RESUME QUERY</span>
+          <span class="btn-arrow">&rarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Evidence Modal: Dual Frame & Clip Viewer -->
+  <div class="modal-overlay hidden" id="clip-modal">
+    <div class="modal-card video-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="video-glyph" id="modal-mode-glyph">🎯</div>
+          <div>
+            <h3 id="modal-title">EVIDENCE INTELLIGENCE DOSSIER</h3>
+            <span class="modal-subtitle" id="modal-target-cam">CAMERA: --</span>
+          </div>
+        </div>
+        <div class="modal-view-tabs">
+          <button type="button" id="modal-tab-frame" class="modal-tab-btn active">🎯 HIGHLIGHTED FRAME</button>
+          <button type="button" id="modal-tab-video" class="modal-tab-btn">▶ VIDEO CLIP (5s)</button>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+
+      <!-- Frame Viewer Wrapper (Default) -->
+      <div class="modal-frame-wrapper" id="modal-frame-wrapper">
+        <img id="modal-frame-img" src="" alt="Target Frame with Highlighting">
+        <div class="frame-reticle-badge">
+          <span class="hud-pulse-dot"></span>
+          <span id="modal-frame-reticle-label">TARGET LOCKED // CYBER RETICLE ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Video Clip Wrapper -->
+      <div class="modal-video-wrapper hidden" id="modal-video-wrapper">
+        <video id="modal-video" controls autoplay loop playsinline>
+          <source src="" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+
+      <div class="video-custom-controls" id="modal-video-controls">
+        <div class="speed-controls">
+          <span class="ctrl-label">PLAYBACK SPEED:</span>
+          <button class="speed-btn" data-speed="0.5">0.5x</button>
+          <button class="speed-btn active" data-speed="1.0">1.0x</button>
+          <button class="speed-btn" data-speed="1.5">1.5x</button>
+          <button class="speed-btn" data-speed="2.0">2.0x</button>
+        </div>
+        <div class="video-action-links">
+          <a id="modal-download-clip" href="" download class="tactical-btn small">
+            DOWNLOAD MP4
+          </a>
+        </div>
+      </div>
+
+      <div class="modal-meta" id="modal-meta">
+        <!-- Metadata dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Re-ID Multi-Camera Timeline Modal (Prompt 10 Stretch) -->
+  <div class="modal-overlay hidden" id="reid-modal">
+    <div class="modal-card reid-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="video-glyph">&#10531;</div>
+          <div>
+            <h3 id="reid-modal-title">CROSS-CAMERA RE-ID &amp; PATH TIMELINE</h3>
+            <span class="modal-subtitle" id="reid-object-class">OBJECT CLASS: --</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="reid-close-btn">&times;</button>
+      </div>
+
+      <div class="reid-body">
+        <div class="reid-summary-banner">
+          <span class="reid-summary-label">RECONSTRUCTED CHRONOLOGICAL PATH:</span>
+          <span id="reid-timeline-summary" class="reid-summary-text">--</span>
+        </div>
+
+        <div class="reid-hops-container" id="reid-hops-container">
+          <!-- Populated dynamically with hop cards -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="tactical-btn" id="reid-close-footer-btn">CLOSE TIMELINE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

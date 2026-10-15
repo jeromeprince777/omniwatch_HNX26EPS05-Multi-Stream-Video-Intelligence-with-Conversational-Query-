@@ -1,0 +1,1 @@
+- Multi-camera video ingestion pipeline fully implemented and wired into scripts/ingest.sh and scripts/ingest.ps1.

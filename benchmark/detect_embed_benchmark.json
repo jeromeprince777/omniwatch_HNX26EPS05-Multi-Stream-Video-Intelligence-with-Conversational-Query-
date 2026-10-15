@@ -1,0 +1,93 @@
+{
+  "device": "cuda",
+  "detector_model": "models\\yolov8s-world.pt",
+  "encoder_model": "ViT-B-32 (laion2b_s34b_b79k)",
+  "frame_resolution": "810x1080",
+  "num_detections": 6,
+  "detector_latency_ms": 29.61,
+  "attribute_latency_ms": 257.96,
+  "crop_encoder_total_ms": 31.85,
+  "crop_encoder_per_crop_ms": 5.31,
+  "text_prompt_ensemble_latency_ms": 42.96,
+  "detections": [
+    {
+      "cls": "person",
+      "conf": 0.9282,
+      "bbox": [
+        0.0615,
+        0.3711,
+        0.3073,
+        0.8367
+      ],
+      "quality": 0.9713,
+      "primary_color": "gray",
+      "secondary_color": "beige"
+    },
+    {
+      "cls": "person",
+      "conf": 0.9229,
+      "bbox": [
+        0.275,
+        0.3754,
+        0.425,
+        0.7949
+      ],
+      "quality": 0.9122,
+      "primary_color": "black",
+      "secondary_color": "gray"
+    },
+    {
+      "cls": "person",
+      "conf": 0.9126,
+      "bbox": [
+        0.826,
+        0.3596,
+        1.0,
+        0.8109
+      ],
+      "quality": 0.9601,
+      "primary_color": "black",
+      "secondary_color": "gray"
+    },
+    {
+      "cls": "bus",
+      "conf": 0.8789,
+      "bbox": [
+        0.0042,
+        0.2117,
+        0.9958,
+        0.6836
+      ],
+      "quality": 0.9516,
+      "primary_color": "black",
+      "secondary_color": "gray"
+    },
+    {
+      "cls": "person",
+      "conf": 0.6406,
+      "bbox": [
+        0.0,
+        0.4086,
+        0.0931,
+        0.9586
+      ],
+      "quality": 0.7603,
+      "primary_color": "black",
+      "secondary_color": "silver"
+    },
+    {
+      "cls": "person",
+      "conf": 0.4824,
+      "bbox": [
+        0.0,
+        0.4445,
+        0.0953,
+        0.8117
+      ],
+      "quality": 0.643,
+      "primary_color": "gray",
+      "secondary_color": "silver"
+    }
+  ],
+  "annotated_image": "benchmark\\annotated_detection_sample.jpg"
+}

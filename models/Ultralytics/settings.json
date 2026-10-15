@@ -1,0 +1,19 @@
+{
+  "settings_version": "0.0.8",
+  "datasets_dir": "C:\\Users\\ffgam\\OneDrive\\Desktop\\omniwatch-pack\\datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "e5746c403e3c0e80c727aca048cda081c0320c1b61ce248cb389cd74f861c3e0",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "mlflow": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

@@ -1,0 +1,111 @@
+active_preset: accurate
+presets:
+  fast:
+    sample_fps: 2.0
+    motion_gate: true
+    motion_threshold: 0.015
+    detector_model: yolov8s.pt
+    detector_conf: 0.40
+    encoder_name: ViT-B-32
+    encoder_pretrained: laion2b_s34b_b79k
+    verify_enabled: false
+    verify_top_k: 0
+    weights:
+      w_emb: 0.70
+      w_attr: 0.30
+      w_time: 0.0
+    thresholds:
+      exists: 0.25
+      find: 0.25
+      when: 0.25
+      count: 0.28
+      path: 0.25
+  balanced:
+    sample_fps: 2.0
+    motion_gate: true
+    motion_threshold: 0.015
+    detector_model: yolov8s.pt
+    detector_conf: 0.40
+    encoder_name: ViT-B-32
+    encoder_pretrained: laion2b_s34b_b79k
+    verify_enabled: true
+    verify_top_k: 5
+    weights:
+      w_emb: 0.65
+      w_attr: 0.35
+      w_time: 0.0
+    thresholds:
+      exists: 0.25
+      find: 0.25
+      when: 0.25
+      count: 0.28
+      path: 0.25
+  accurate:
+    sample_fps: 2.0
+    motion_gate: false
+    motion_threshold: 0.0
+    detector_model: yolov8s.pt
+    detector_conf: 0.40
+    encoder_name: ViT-B-32
+    encoder_pretrained: laion2b_s34b_b79k
+    verify_enabled: true
+    verify_top_k: 15
+    weights:
+      w_emb: 0.40
+      w_attr: 0.30
+      w_time: 0.0
+    thresholds:
+      exists: 0.25
+      find: 0.25
+      when: 0.25
+      count: 0.28
+      path: 0.25
+detector_vocab:
+- person
+- car
+- truck
+- bus
+- motorcycle
+- bicycle
+- backpack
+- handbag
+- suitcase
+- umbrella
+- box
+tracker:
+  name: bytetrack
+  track_thresh: 0.40
+  track_buffer: 30
+  match_thresh: 0.80
+storage:
+  db_path: data/omniwatch.db
+  vector_dir: data/index
+  evidence_cache_dir: data/cache
+query:
+  parser_mode: rules_first
+  ollama_url: http://localhost:11434
+  parser_model: qwen2.5:3b
+  parser_timeout_s: 6.0
+  fallback_to_rules: true
+  dedup_gap_s: 2.0
+  dedup_sim_thresh: 0.90
+  retrieval_top_k: 50
+vlm:
+  preferred_verifier: smolvlm2
+  fallback_verifier: openclip
+  model_path: models/SmolVLM2-2.2B-Instruct
+  device: auto
+  max_crops: 15
+  enabled: true
+  alpha: 0.4
+  beta: 0.6
+system:
+  device: auto
+  time_tolerance_tau: 5.0
+  assume_synced: false
+  log_level: INFO
+privacy:
+  blur: true
+  method: hybrid
+  strength: 35
+

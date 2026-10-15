@@ -1,0 +1,11 @@
+site_id: campus_demo
+reference_now: null            # optional ISO time; default = end of latest footage
+cameras:
+  - camera_id: cam1
+    label: "Main Gate"
+    video: data/campus/cam1.mp4
+    start_time: "2026-10-08T09:00:00+05:30"
+  - camera_id: cam2
+    label: "East Corridor"
+    video: data/campus/cam2.mp4
+    start_time: "2026-10-08T09:00:12+05:30"

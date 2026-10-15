@@ -1,0 +1,21 @@
+{
+  "run_id": "eval_dev_20261008_160622",
+  "split": "dev",
+  "n_queries": 31,
+  "systems": {
+    "OW-fast": {
+      "hit1_tau5": 0.0435,
+      "hit1_tau15": 0.0435,
+      "hit5_tau5": 0.2174,
+      "hit5_tau15": 0.2174,
+      "mrr": 0.1172,
+      "existence_acc": 0.5806,
+      "negative_fpr": 0.0,
+      "loc_err_median_s": 229.75,
+      "loc_err_p90_s": 266.85,
+      "latency_p50_ms": 0.4,
+      "latency_p95_ms": 26.9,
+      "latency_mean_ms": 10.5
+    }
+  }
+}

@@ -1,0 +1,59 @@
+# Environments and virtualenvs
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache and byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ruff_cache/
+
+# Data and Models (Strictly forbidden to commit per AGENTS.md)
+data/
+cache/
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.bin
+*.engine
+models/*.pt
+models/*.onnx
+models/*.bin
+models/*.safetensors
+models/*.pth
+models/*.engine
+!models/MANIFEST.md
+
+# Media files
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.webm
+
+# Database and Vector Index artifacts
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.faiss
+*.index
+*.npy
+*.npz
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Eval raw outputs (keep templates/queries, ignore raw generated runs)
+eval/results/*.json
+eval/results/*.csv
+!eval/results/.gitkeep
